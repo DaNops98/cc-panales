@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CC Pañales</title>
+<meta name="description" content="CC Panales — panales para adultos, ropa interior absorbente y productos de cuidado personal con despacho discreto a todo Chile.">
+</head>
+<body>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,450;0,9..144,550;0,9..144,650;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap');
+
+  :root{
+    --cream:#faf6ee;
+    --cream-2:#f2e9d9;
+    --cream-3:#ece0cb;
+    --clay:#c98a53;
+    --clay-deep:#8a5430;
+    --clay-soft:#eccaa0;
+    --sage:#7c8c6b;
+    --sage-soft:#dde4d2;
+    --ink:#3a2512;
+    --ink-dim:#7a6a57;
+    --line:rgba(58,37,18,0.14);
+    --shadow:0 18px 40px rgba(90,58,24,0.14);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--cream); color:var(--ink);
+    font-family:'Work Sans', ui-sans-serif, system-ui, sans-serif;
+    font-weight:400; font-size:1.05rem; line-height:1.6;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces', 'Iowan Old Style', serif; font-weight:600;
+    text-wrap:balance; margin:0; color:var(--ink);
+  }
+  a{color:inherit;}
+  button{font-family:inherit;}
+  .wrap{max-width:1160px; margin:0 auto; padding:0 clamp(1.25rem,4vw,3rem);}
+  section{position:relative;}
+  #inicio, #productos, #vida-activa, #nosotros, #contacto{ scroll-margin-top:92px; }
+  .eyebrow{
+    font-size:0.78rem; text-transform:uppercase; letter-spacing:0.14em; font-weight:600;
+    color:var(--clay-deep);
+  }
+
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:0.6rem;
+    padding:0.95rem 1.8rem; border-radius:999px; font-size:1rem; font-weight:600;
+    background:var(--clay-deep); color:var(--cream); border:1px solid var(--clay-deep);
+    transition:background .2s ease, transform .15s ease, box-shadow .2s ease;
+    text-decoration:none; min-height:48px;
+  }
+  .btn:hover{background:#73431f; transform:translateY(-1px); box-shadow:var(--shadow);}
+  .btn-ghost{background:transparent; color:var(--clay-deep); border:1.5px solid var(--clay-deep);}
+  .btn-ghost:hover{background:var(--clay-soft); color:var(--ink);}
+  .btn-lg{padding:1.1rem 2.2rem; font-size:1.05rem;}
+
+  /* ---------- icons ---------- */
+  .icon{width:40px; height:40px; flex-shrink:0; color:var(--clay-deep);}
+  .btn .icon{ color:var(--cream); }
+  .btn-ghost .icon{ color:var(--clay-deep); }
+
+  /* ---------- nav ---------- */
+  .nav{
+    position:sticky; top:0; z-index:100; background:rgba(250,246,238,0.94);
+    backdrop-filter:blur(6px); border-bottom:1px solid var(--line);
+  }
+  .nav-row{display:flex; align-items:center; justify-content:space-between; padding:1rem clamp(1.25rem,4vw,3rem);}
+  .brand{display:flex; align-items:center; gap:0.6rem; font-family:'Fraunces',serif; font-weight:650; font-size:1.2rem;}
+  .brand-mark{width:2.3rem; height:2.3rem; flex-shrink:0;}
+  .nav-links{display:flex; align-items:center; gap:2rem;}
+  .nav-links a{font-size:0.92rem; font-weight:500; color:var(--ink);}
+  .nav-links a:hover{color:var(--clay-deep);}
+  .nav-cta{display:flex; align-items:center; gap:1rem;}
+  .burger{display:none; width:2.6rem; height:2.6rem; border-radius:50%; border:1px solid var(--line); background:transparent; align-items:center; justify-content:center; color:var(--ink);}
+  .mobile-menu{
+    position:fixed; inset:0; background:var(--cream); z-index:150;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2rem;
+    transform:translateY(-100%); transition:transform .4s cubic-bezier(.65,0,.35,1);
+  }
+  .mobile-menu.open{transform:translateY(0);}
+  .mobile-menu a{font-family:'Fraunces',serif; font-size:1.7rem;}
+  .mobile-close{position:absolute; top:1.3rem; right:1.3rem; width:2.6rem; height:2.6rem; border-radius:50%; border:1px solid var(--line); background:transparent; color:var(--ink);}
+
+  /* ---------- hero ---------- */
+  .hero{padding:4.5rem 0 5rem;}
+  .hero-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:3.5rem; align-items:center;}
+  .hero h1{font-size:clamp(2.4rem,5vw,3.6rem); line-height:1.08; margin-bottom:1.1rem;}
+  .hero-sub{font-size:1.2rem; color:var(--clay-deep); font-weight:600; margin-bottom:1rem;}
+  .hero-desc{color:var(--ink-dim); font-size:1.05rem; line-height:1.75; margin-bottom:2rem; max-width:34rem;}
+  .hero-ctas{display:flex; gap:1rem; flex-wrap:wrap;}
+  .hero-visual{
+    position:relative; aspect-ratio:1/1; border-radius:28px; background:
+      radial-gradient(85% 70% at 30% 20%, var(--clay-soft), var(--cream-3) 72%);
+    display:flex; align-items:center; justify-content:center; overflow:hidden;
+  }
+  .hero-visual .big-icon{width:46%; height:46%;}
+  .hero-visual::after{
+    content:""; position:absolute; width:60%; height:60%; border-radius:50%;
+    border:1.5px dashed rgba(138,84,48,0.3); animation:spin 60s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  /* ---------- feature chips ---------- */
+  .chipband{padding:2.6rem 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--cream-2);}
+  .chip-head{text-align:center; margin-bottom:2rem;}
+  .chip-head .eyebrow{display:block; margin-bottom:0.5rem;}
+  .chip-head h2{font-size:clamp(1.6rem,3.4vw,2.1rem);}
+  .chip-head p{color:var(--ink-dim); max-width:36rem; margin:0.8rem auto 0;}
+  .chips{display:grid; grid-template-columns:repeat(4,1fr); gap:1rem;}
+  .chip{
+    background:var(--cream); border:1px solid var(--line); border-radius:16px;
+    padding:1.3rem 1.2rem; display:flex; align-items:center; gap:0.8rem; font-weight:500; font-size:0.95rem;
+  }
+  .chip .icon{width:28px; height:28px;}
+
+  /* ---------- section heading reused ---------- */
+  .sec{padding:5.5rem 0;}
+  .sec-head{max-width:40rem; margin-bottom:3rem;}
+  .sec-head .eyebrow{display:block; margin-bottom:0.6rem;}
+  .sec-head h2{font-size:clamp(2rem,4.2vw,2.8rem); margin-bottom:0.9rem;}
+  .sec-head p{color:var(--ink-dim); font-size:1.05rem; line-height:1.7;}
+  .sec-head.center{margin-left:auto; margin-right:auto; text-align:center;}
+
+  /* ---------- product cards ---------- */
+  .prod-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1.4rem;}
+  .prod-card{
+    background:var(--cream); border:1px solid var(--line); border-radius:20px;
+    padding:2rem 1.6rem; display:flex; flex-direction:column; gap:1rem;
+    transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+  }
+  .prod-card:hover{transform:translateY(-5px); box-shadow:var(--shadow); border-color:var(--clay);}
+  .prod-card .icon{width:44px; height:44px; background:var(--clay-soft); border-radius:12px; padding:9px;}
+  .prod-card h3{font-size:1.25rem;}
+  .prod-card p{color:var(--ink-dim); font-size:0.94rem; line-height:1.65; margin:0;}
+
+  /* ---------- mission banner ---------- */
+  .mission{
+    background:linear-gradient(135deg, var(--clay-deep), #6b3e1f); color:var(--cream);
+    border-radius:28px; padding:clamp(2.2rem,5vw,3.6rem); text-align:center;
+  }
+  .mission .eyebrow{color:var(--clay-soft);}
+  .mission h2{color:var(--cream); font-size:clamp(1.7rem,3.8vw,2.4rem); margin:0.6rem 0 1rem;}
+  .mission p{color:rgba(250,246,238,0.88); max-width:38rem; margin:0 auto; line-height:1.75;}
+
+  /* ---------- why-us grid ---------- */
+  .why-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1.6rem; margin-top:3rem;}
+  .why-card{display:flex; gap:1.1rem; align-items:flex-start;}
+  .why-card .icon{width:46px; height:46px; background:var(--sage-soft); border-radius:50%; padding:10px; flex-shrink:0; color:var(--sage);}
+  .why-card h3{font-size:1.1rem; margin-bottom:0.4rem;}
+  .why-card p{color:var(--ink-dim); font-size:0.94rem; line-height:1.65; margin:0;}
+
+  /* ---------- trust banner ---------- */
+  .trust{
+    display:flex; align-items:center; gap:1.4rem; background:var(--sage-soft);
+    border-radius:20px; padding:1.8rem 2rem; margin-top:3rem;
+  }
+  .trust .icon{width:40px; height:40px; flex-shrink:0; color:var(--sage);}
+  .trust p{margin:0; color:#394a2c; font-size:0.98rem; line-height:1.6;}
+
+  /* ---------- segments ---------- */
+  .seg-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:2.6rem;}
+  .seg-chip{
+    background:var(--cream-2); border-radius:16px; padding:1.4rem 1.2rem;
+    display:flex; align-items:center; gap:0.9rem; font-weight:500; font-size:0.95rem;
+  }
+  .seg-chip .icon{width:30px; height:30px;}
+
+  /* ---------- testimonial ---------- */
+  .testimonial{
+    margin-top:3.4rem; background:var(--cream); border:1px solid var(--line); border-radius:24px;
+    padding:clamp(2rem,4vw,3rem); position:relative;
+  }
+  .testimonial .mark{font-family:'Fraunces',serif; font-size:4rem; color:var(--clay-soft); line-height:1; margin-bottom:-0.6rem;}
+  .testimonial p{font-family:'Fraunces',serif; font-style:italic; font-size:clamp(1.2rem,2.4vw,1.5rem); line-height:1.5; color:var(--ink);}
+  .testimonial cite{display:block; margin-top:1.2rem; font-style:normal; font-size:0.88rem; color:var(--ink-dim);}
+
+  /* ---------- contact ---------- */
+  .contact-grid{display:grid; grid-template-columns:0.85fr 1.15fr; gap:3rem;}
+  .contact-info{display:flex; flex-direction:column; gap:1.4rem;}
+  .info-row{display:flex; gap:1rem; align-items:flex-start;}
+  .info-row .icon{width:34px; height:34px; flex-shrink:0;}
+  .info-row strong{display:block; font-size:1rem; margin-bottom:0.2rem;}
+  .info-row span{color:var(--ink-dim); font-size:0.92rem;}
+  .form-card{
+    background:var(--cream-2); border-radius:24px; padding:clamp(1.8rem,3.4vw,2.6rem);
+  }
+  .field{margin-bottom:1.2rem;}
+  .field label{display:block; font-size:0.88rem; font-weight:600; margin-bottom:0.5rem;}
+  .field input, .field select, .field textarea{
+    width:100%; padding:0.85rem 1rem; border-radius:12px; border:1.5px solid var(--line);
+    background:var(--cream); font-family:inherit; font-size:0.98rem; color:var(--ink);
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{outline:2px solid var(--clay); outline-offset:1px;}
+  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:1rem;}
+  .field textarea{resize:vertical; min-height:100px;}
+  .form-note{font-size:0.82rem; color:var(--ink-dim); margin-top:0.9rem; line-height:1.6;}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line); padding:3rem 0 2rem; background:var(--cream-2);}
+  .footer-grid{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:2rem;}
+  .footer-links{display:flex; gap:1.6rem; flex-wrap:wrap;}
+  .footer-links a{font-size:0.9rem; color:var(--ink-dim);}
+  .footer-links a:hover{color:var(--clay-deep);}
+  .footer-bottom{
+    margin-top:2.2rem; padding-top:1.4rem; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.8rem;
+    font-size:0.82rem; color:var(--ink-dim);
+  }
+  .footer-bottom a{color:var(--ink-dim); text-decoration:underline; text-underline-offset:2px;}
+
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:none;}
+
+  @media (max-width:980px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-visual{max-width:360px; margin:0 auto; aspect-ratio:1/1;}
+    .chips{grid-template-columns:repeat(2,1fr);}
+    .prod-grid{grid-template-columns:repeat(2,1fr);}
+    .why-grid{grid-template-columns:1fr;}
+    .seg-grid{grid-template-columns:repeat(2,1fr);}
+    .contact-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:760px){
+    .nav-links{display:none;}
+    .nav-cta .btn-text{display:none;}
+    .burger{display:flex;}
+  }
+  @media (max-width:560px){
+    .chips{grid-template-columns:1fr;}
+    .prod-grid{grid-template-columns:1fr;}
+    .seg-grid{grid-template-columns:1fr;}
+    .field-row{grid-template-columns:1fr;}
+    .footer-bottom{flex-direction:column;}
+  }
+</style>
+
+<!-- ===== shared icon defs ===== -->
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="ic-heart-hands" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M24 30c-7-5-13-9-13-16a7 7 0 0 1 13-4 7 7 0 0 1 13 4c0 7-6 11-13 16Z"/>
+    <path d="M10 36c3 3 9 4 14 4s11-1 14-4"/>
+  </symbol>
+  <symbol id="ic-truck" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="4" y="14" width="24" height="18" rx="2"/>
+    <path d="M28 20h10l6 7v5h-16z"/>
+    <circle cx="14" cy="36" r="3.4"/>
+    <circle cx="36" cy="36" r="3.4"/>
+  </symbol>
+  <symbol id="ic-chat" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 24c0-8.8 7.2-16 16-16s16 7.2 16 16-7.2 16-16 16c-2.3 0-4.5-.5-6.5-1.4L8 40l3-9.5C9 27.8 8 26 8 24Z"/>
+  </symbol>
+  <symbol id="ic-box" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 16 24 8l18 8-18 8z"/>
+    <path d="M6 16v18l18 8 18-8V16"/>
+    <path d="M24 24v18"/>
+  </symbol>
+  <symbol id="ic-shirt" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M17 7 24 11 31 7l9 8-6 6-3-2v20H17V19l-3 2-6-6Z"/>
+  </symbol>
+  <symbol id="ic-bed" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 40V18a3 3 0 0 1 3-3h7a3 3 0 0 1 3 3v6"/>
+    <path d="M5 24h38v16"/>
+    <path d="M22 24v-2a4 4 0 0 1 4-4h11a3 3 0 0 1 3 3v3"/>
+    <circle cx="12" cy="17" r="2.6"/>
+  </symbol>
+  <symbol id="ic-droplet" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M24 6c7 9 13 16.5 13 23.5A13 13 0 0 1 11 29.5C11 22.5 17 15 24 6Z"/>
+  </symbol>
+  <symbol id="ic-home" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M7 22 24 7l17 15"/>
+    <path d="M11 19v20h26V19"/>
+    <path d="M19 39V27h10v12"/>
+  </symbol>
+  <symbol id="ic-shield" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M24 5 40 11v12c0 11-7 17-16 20C15 40 8 34 8 23V11Z"/>
+    <path d="M17 24l5 5 9-10"/>
+  </symbol>
+  <symbol id="ic-calendar" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="6" y="9" width="36" height="32" rx="3"/>
+    <path d="M6 18h36"/>
+    <path d="M15 5v8M33 5v8"/>
+    <path d="M14 27h6M14 33h6M22 27h6M22 33h6M30 27h6"/>
+  </symbol>
+  <symbol id="ic-tag" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M27 6h12v12L19 38 5 24Z"/>
+    <circle cx="34" cy="13" r="2.6"/>
+  </symbol>
+  <symbol id="ic-person" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="24" cy="15" r="8"/>
+    <path d="M8 41c1-9 8-14 16-14s15 5 16 14"/>
+  </symbol>
+  <symbol id="ic-cane" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="20" cy="11" r="6"/>
+    <path d="M16 17c-3 6-2 11 2 14l-6 12"/>
+    <path d="M22 31l10 4"/>
+  </symbol>
+  <symbol id="ic-recover" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M24 42C12 34 5 27 5 18a10 10 0 0 1 19-4 10 10 0 0 1 19 4c0 9-7 16-19 24Z"/>
+    <path d="M18 23h5l3-5 3 9 2-4h5"/>
+  </symbol>
+  <symbol id="ic-building" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="9" y="6" width="22" height="36"/>
+    <rect x="31" y="18" width="10" height="24"/>
+    <path d="M14 13h4M22 13h4M14 21h4M22 21h4M14 29h4M22 29h4"/>
+  </symbol>
+  <symbol id="ic-cross" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="6" y="6" width="36" height="36" rx="8"/>
+    <path d="M24 16v16M16 24h16"/>
+  </symbol>
+  <symbol id="ic-family" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="16" cy="13" r="5.5"/>
+    <circle cx="32" cy="13" r="5.5"/>
+    <path d="M5 38c1-7 5-11 11-11s10 4 11 11"/>
+    <path d="M21 38c1-7 5-11 11-11s10 4 11 11"/>
+  </symbol>
+  <symbol id="ic-whatsapp" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M24 6C14 6 7 13 7 23c0 3.6 1 6.7 2.8 9.4L7 42l9.9-2.7C19.5 40.6 21.7 41 24 41c10 0 17-7 17-17S34 6 24 6Z"/>
+    <path d="M17.5 18.8c.4-1.2 1-1.3 1.6-1.3h1c.4 0 .9 0 1.1.9.3 1 1 2.9 1.1 3.1.1.2.2.5 0 .8-.2.4-.3.6-.6 1-.3.3-.6.7-.2 1.4 1.5 2.6 3 3.6 5.2 4.6.4.2.7.1.9-.1.3-.3.9-1 1.1-1.4.2-.4.5-.3.8-.2.3.1 2.2 1 2.6 1.2.4.2.6.3.7.5.1.3.1 1.4-.4 2.5-.5 1.1-2.6 2.1-3.6 2.2-.9.1-2 .1-3.3-.2-.7-.2-1.6-.5-2.8-1-4.9-2.1-8.1-6.9-8.3-7.2-.2-.3-2-2.7-2-5.1 0-2.4 1.2-3.6 1.7-4.2Z"/>
+  </symbol>
+  <symbol id="ic-mail" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="5" y="10" width="38" height="28" rx="4"/>
+    <path d="M6 13l18 14 18-14"/>
+  </symbol>
+  <symbol id="ic-pin" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M24 44S10 29 10 19a14 14 0 0 1 28 0c0 10-14 25-14 25Z"/>
+    <circle cx="24" cy="19" r="5"/>
+  </symbol>
+  <symbol id="ic-clock" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="24" cy="24" r="18"/>
+    <path d="M24 13v11l8 5"/>
+  </symbol>
+</svg>
+
+<!-- ===== Nav ===== -->
+<nav class="nav">
+  <div class="nav-row">
+    <div class="brand">
+      <svg class="brand-mark icon" viewBox="0 0 48 48"><use href="#ic-heart-hands"/></svg>
+      CC Pañales
+    </div>
+    <div class="nav-links">
+      <a href="#inicio">Inicio</a>
+      <a href="#productos">Productos</a>
+      <a href="#vida-activa">Vida activa</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+    <div class="nav-cta">
+      <a class="btn" href="https://wa.me/56987654321?text=Hola%2C%20quiero%20cotizar%20productos%20de%20cuidado%20e%20higiene" target="_blank" rel="noopener"><svg class="icon" style="width:20px;height:20px;" viewBox="0 0 48 48"><use href="#ic-whatsapp"/></svg><span class="btn-text">Cotizar por WhatsApp</span></a>
+      <button class="burger" id="burgerBtn" aria-label="Abrir menú">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileCloseBtn" aria-label="Cerrar menú">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l16 16M20 4L4 20"/></svg>
+  </button>
+  <a href="#inicio" class="mnav">Inicio</a>
+  <a href="#productos" class="mnav">Productos</a>
+  <a href="#vida-activa" class="mnav">Vida activa</a>
+  <a href="#nosotros" class="mnav">Nosotros</a>
+  <a href="#contacto" class="mnav">Contacto</a>
+</div>
+
+<!-- ===== Hero ===== -->
+<header class="hero" id="inicio">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">CC Pañales</p>
+      <h1>Cuidado adulto, con dignidad</h1>
+      <p class="hero-sub">Protección diaria que respeta tu autonomía</p>
+      <p class="hero-desc">CC Pañales distribuye pañales para adultos, ropa interior absorbente y protectores desechables a domicilios, farmacias, clínicas y residencias en todo Chile, con despacho discreto.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-lg" href="https://wa.me/56987654321?text=Hola%2C%20quiero%20cotizar%20productos%20de%20cuidado%20e%20higiene" target="_blank" rel="noopener">
+          <svg class="icon" style="width:22px;height:22px;"><use href="#ic-whatsapp"/></svg> Cotizar por WhatsApp
+        </a>
+        <a class="btn btn-ghost btn-lg" href="#productos">Ver catálogo</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <svg class="big-icon icon" viewBox="0 0 48 48" style="width:46%; height:46%;"><use href="#ic-heart-hands"/></svg>
+    </div>
+  </div>
+</header>
+
+<!-- ===== Key messaging / chips ===== -->
+<section class="chipband">
+  <div class="wrap">
+    <div class="chip-head reveal">
+      <span class="eyebrow">Un pedido, resuelto</span>
+      <h2>Elige el nivel de protección y la talla, y nosotros nos encargamos del resto.</h2>
+    </div>
+    <div class="chips">
+      <div class="chip reveal"><svg class="icon"><use href="#ic-tag"/></svg> Venta mayorista y al detalle</div>
+      <div class="chip reveal"><svg class="icon"><use href="#ic-truck"/></svg> Despacho discreto a todo Chile</div>
+      <div class="chip reveal"><svg class="icon"><use href="#ic-chat"/></svg> Asesoría real por WhatsApp</div>
+      <div class="chip reveal"><svg class="icon"><use href="#ic-box"/></svg> Stock permanente en toda talla y nivel</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Catálogo ===== -->
+<section class="sec" id="productos">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Catálogo</span>
+      <h2>Productos para cada nivel de necesidad</h2>
+      <p>Trabajamos con distintos formatos para que la persona conserve la mayor autonomía posible, y para facilitar el trabajo de quien cuida.</p>
+    </div>
+    <div class="prod-grid">
+      <div class="prod-card reveal">
+        <svg class="icon"><use href="#ic-shirt"/></svg>
+        <h3>Pañales</h3>
+        <p>Ropa interior absorbente y pañales con cintas, en todas las tallas y niveles de absorción.</p>
+      </div>
+      <div class="prod-card reveal">
+        <svg class="icon"><use href="#ic-bed"/></svg>
+        <h3>Sabanillas y apósitos</h3>
+        <p>Protectores de cama y apósitos para mayor higiene, comodidad y cuidado de la piel.</p>
+      </div>
+      <div class="prod-card reveal">
+        <svg class="icon"><use href="#ic-droplet"/></svg>
+        <h3>Cuidado personal</h3>
+        <p>Toallitas de higiene con y sin fragancia, para el aseo diario y la limpieza en cada cambio.</p>
+      </div>
+      <div class="prod-card reveal">
+        <svg class="icon"><use href="#ic-home"/></svg>
+        <h3>Hogar</h3>
+        <p>Packs por mayor para residencias, clínicas, farmacias y distribuidores, con empaques neutros, sin logos visibles.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Mission + Why us ===== -->
+<section class="sec" id="vida-activa" style="padding-top:0;">
+  <div class="wrap">
+    <div class="mission reveal">
+      <span class="eyebrow">Nuestro compromiso</span>
+      <h2>Vivir la vida sin que la incontinencia la detenga</h2>
+      <p>Protección discreta y confiable para que cada persona siga disfrutando de sus rutinas, sus salidas y su independencia, con la tranquilidad de estar bien cuidada.</p>
+    </div>
+
+    <div class="sec-head reveal" style="margin-top:4.5rem;">
+      <span class="eyebrow">Por qué CC Pañales</span>
+      <h2>Cuidado sin complicaciones, para ti o para quien cuidas</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <svg class="icon"><use href="#ic-shield"/></svg>
+        <div><h3>Discreción total</h3><p>Empaques neutros y despacho sin marcas visibles en la caja.</p></div>
+      </div>
+      <div class="why-card reveal">
+        <svg class="icon"><use href="#ic-calendar"/></svg>
+        <div><h3>Entrega periódica</h3><p>Coordina un despacho mensual y olvídate de quedarte sin stock.</p></div>
+      </div>
+      <div class="why-card reveal">
+        <svg class="icon"><use href="#ic-tag"/></svg>
+        <div><h3>Precios por volumen</h3><p>Escalas de precio para compra familiar, farmacias y residencias.</p></div>
+      </div>
+      <div class="why-card reveal">
+        <svg class="icon"><use href="#ic-chat"/></svg>
+        <div><h3>Asesoría personalizada</h3><p>Te ayudamos a elegir talla y nivel de absorción, hablando con una persona real.</p></div>
+      </div>
+    </div>
+
+    <div class="trust reveal">
+      <svg class="icon"><use href="#ic-box"/></svg>
+      <p>Tu pedido, sin exposición. Despachamos en cajas o bolsas neutras, sin logos ni descripciones visibles del contenido.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Para quién trabajamos + testimonio ===== -->
+<section class="sec" id="nosotros" style="padding-top:0;">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Para quién trabajamos</span>
+      <h2>Distribuimos a domicilios e instituciones</h2>
+      <p>Adaptamos el pedido según si es para uso personal, para un familiar a cargo, o para abastecer una institución.</p>
+    </div>
+    <div class="seg-grid">
+      <div class="seg-chip reveal"><svg class="icon"><use href="#ic-person"/></svg> Adultos mayores en el hogar</div>
+      <div class="seg-chip reveal"><svg class="icon"><use href="#ic-cane"/></svg> Personas con movilidad reducida</div>
+      <div class="seg-chip reveal"><svg class="icon"><use href="#ic-recover"/></svg> Recuperación post-operatoria</div>
+      <div class="seg-chip reveal"><svg class="icon"><use href="#ic-building"/></svg> Residencias y ELEAM</div>
+      <div class="seg-chip reveal"><svg class="icon"><use href="#ic-cross"/></svg> Clínicas y centros de salud</div>
+      <div class="seg-chip reveal"><svg class="icon"><use href="#ic-family"/></svg> Cuidadores y familiares</div>
+    </div>
+
+    <div class="testimonial reveal">
+      <div class="mark">"</div>
+      <p>Contratamos el despacho mensual para mi papá y siempre llega a tiempo, con la talla y el nivel de absorción correctos. Nos ahorra tiempo y preocupaciones.</p>
+      <cite>— Cuidadora familiar, cliente frecuente</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Contacto ===== -->
+<section class="sec" id="contacto" style="padding-top:0;">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Contacto</span>
+      <h2>Pide tu cotización hoy</h2>
+      <p>Cuéntanos la talla, el nivel de protección y tu comuna, y te respondemos con precios y tiempos de despacho.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <div class="info-row">
+          <svg class="icon"><use href="#ic-whatsapp"/></svg>
+          <div><strong>+56 9 8765 4321</strong><span>Respuesta rápida para cotizaciones</span></div>
+        </div>
+        <div class="info-row">
+          <svg class="icon"><use href="#ic-mail"/></svg>
+          <div><strong>hola@ccpanales.cl</strong><span>Consulta por catálogo o despacho</span></div>
+        </div>
+        <div class="info-row">
+          <svg class="icon"><use href="#ic-pin"/></svg>
+          <div><strong>Región Metropolitana, Chile</strong><span>Despacho a domicilio en todo Chile</span></div>
+        </div>
+        <div class="info-row">
+          <svg class="icon"><use href="#ic-clock"/></svg>
+          <div><strong>Lunes a sábado, 9:00–18:00</strong><span>Horario de atención</span></div>
+        </div>
+      </div>
+
+      <div class="form-card reveal">
+        <form id="quoteForm">
+          <div class="field-row">
+            <div class="field">
+              <label for="f-nombre">Nombre</label>
+              <input id="f-nombre" name="nombre" type="text" required>
+            </div>
+            <div class="field">
+              <label for="f-telefono">Teléfono</label>
+              <input id="f-telefono" name="telefono" type="tel" required>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="f-paraquien">¿Para quién es?</label>
+              <select id="f-paraquien" name="paraquien">
+                <option>Uso personal</option>
+                <option>Un familiar a cargo</option>
+                <option>Residencia o clínica</option>
+                <option>Farmacia / reventa</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-nivel">Nivel de protección</label>
+              <select id="f-nivel" name="nivel">
+                <option>No estoy seguro</option>
+                <option>Leve</option>
+                <option>Moderada</option>
+                <option>Alta</option>
+                <option>Extra</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-mensaje">Cuéntanos qué necesitas</label>
+            <textarea id="f-mensaje" name="mensaje" placeholder="Talla, comuna, cantidad aproximada, etc."></textarea>
+          </div>
+          <button type="submit" class="btn btn-lg" style="width:100%;">
+            <svg class="icon" style="width:20px;height:20px;"><use href="#ic-whatsapp"/></svg> Enviar solicitud
+          </button>
+          <p class="form-note">Al enviar, se abre WhatsApp con tu solicitud ya redactada para que la confirmes y nos la mandes directamente.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="brand">
+        <svg class="brand-mark icon" viewBox="0 0 48 48"><use href="#ic-heart-hands"/></svg>
+        CC Pañales
+      </div>
+      <div class="footer-links">
+        <a href="#productos">Productos</a>
+        <a href="#vida-activa">Vida activa</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> CC Pañales — Comercializadora de pañales para adultos. Todos los derechos reservados.</span>
+      <a href="https://DaNops98.github.io/">Parte de Comercial Cardemil</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var WHATSAPP_NUMBER = "56987654321";
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  var form = document.getElementById("quoteForm");
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var nombre = document.getElementById("f-nombre").value.trim();
+    var telefono = document.getElementById("f-telefono").value.trim();
+    var paraquien = document.getElementById("f-paraquien").value;
+    var nivel = document.getElementById("f-nivel").value;
+    var mensaje = document.getElementById("f-mensaje").value.trim();
+
+    var lines = [
+      "Hola, quiero pedir una cotización:",
+      "Nombre: " + (nombre || "-"),
+      "Teléfono: " + (telefono || "-"),
+      "Para quién es: " + paraquien,
+      "Nivel de protección: " + nivel
+    ];
+    if(mensaje){ lines.push("Detalle: " + mensaje); }
+    var text = lines.join("\n");
+    window.open("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text), "_blank");
+  });
+
+  var mobileMenu = document.getElementById("mobileMenu");
+  document.getElementById("burgerBtn").addEventListener("click", function(){ mobileMenu.classList.add("open"); });
+  document.getElementById("mobileCloseBtn").addEventListener("click", function(){ mobileMenu.classList.remove("open"); });
+  Array.prototype.forEach.call(document.querySelectorAll(".mnav"), function(a){
+    a.addEventListener("click", function(){ mobileMenu.classList.remove("open"); });
+  });
+
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var revealEls = document.querySelectorAll(".reveal");
+  if(reduceMotion || !("IntersectionObserver" in window)){
+    revealEls.forEach(function(el){ el.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){ entry.target.classList.add("in"); io.unobserve(entry.target); }
+      });
+    }, {threshold:0.12});
+    revealEls.forEach(function(el){ io.observe(el); });
+    setTimeout(function(){ revealEls.forEach(function(el){ el.classList.add("in"); }); }, 5000);
+  }
+})();
+</script>
+</body>
+</html>
